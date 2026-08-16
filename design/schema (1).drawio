@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net" agent="ChatGPT">
+  <diagram id="campuseats-schema" name="CampusEats Schema">
+    <mxGraphModel dx="1605" dy="1099" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="5kcn5gM70Y1H14B6Lt5_-2" parent="1" style="whiteSpace=wrap;html=1;aspect=fixed;" value="" vertex="1">
+          <mxGeometry height="300" width="300" x="55" y="85" as="geometry" />
+        </mxCell>
+        <mxCell id="title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;fontSize=24;fontStyle=1;fontColor=#111111;align=center;verticalAlign=middle;" value="CampusEats — Database Schema (ER Diagram)" vertex="1">
+          <mxGeometry height="40" width="560" x="520" y="20" as="geometry" />
+        </mxCell>
+        <mxCell id="users" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#2E7D32;fontSize=14;spacing=8;" value="&lt;b&gt;USERS&lt;/b&gt;&lt;hr&gt;user_id : BIGINT&lt;br&gt;name : VARCHAR(100)&lt;br&gt;email : VARCHAR(255) UNIQUE&lt;br&gt;password_hash : VARCHAR(255)&lt;br&gt;created_at : TIMESTAMP&lt;br&gt;&lt;br&gt;&lt;b&gt;PK&lt;/b&gt; user_id" vertex="1">
+          <mxGeometry height="190" width="270" x="70" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="menuBoundary" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=#1565C0;strokeWidth=2;fontStyle=1;fontSize=16;verticalAlign=top;spacingTop=8;shadow=1;" value="Menu Service — MS Suhan" vertex="1">
+          <mxGeometry height="390" width="520" x="410" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="menus" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;fontSize=14;spacing=8;" value="&lt;b&gt;MENUS&lt;/b&gt;&lt;hr&gt;menu_id : BIGINT&lt;br&gt;name : VARCHAR(100)&lt;br&gt;description : TEXT&lt;br&gt;active : BOOLEAN&lt;br&gt;&lt;br&gt;&lt;b&gt;PK&lt;/b&gt; menu_id" vertex="1">
+          <mxGeometry height="180" width="220" x="440" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="fooditems" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#1565C0;fontSize=14;spacing=8;" value="&lt;b&gt;FOOD_ITEMS&lt;/b&gt;&lt;hr&gt;food_item_id : BIGINT&lt;br&gt;menu_id : BIGINT&lt;br&gt;name : VARCHAR(150)&lt;br&gt;price : DECIMAL(10,2)&lt;br&gt;available : BOOLEAN&lt;br&gt;&lt;br&gt;&lt;b&gt;PK&lt;/b&gt; food_item_id&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; menu_id → MENUS.menu_id" vertex="1">
+          <mxGeometry height="200" width="220" x="680" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="menuRel" edge="1" parent="1" source="menus" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#1565C0;" target="fooditems" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="cartBoundary" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=#6A1B9A;strokeWidth=2;fontStyle=1;fontSize=16;verticalAlign=top;spacingTop=8;" value="Cart Service — Shubham Parmar" vertex="1">
+          <mxGeometry height="390" width="540" x="960" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="carts" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6A1B9A;fontSize=14;spacing=8;" value="&lt;b&gt;CARTS&lt;/b&gt;&lt;hr&gt;cart_id : BIGINT&lt;br&gt;user_id : BIGINT (external ref)&lt;br&gt;created_at : TIMESTAMP&lt;br&gt;updated_at : TIMESTAMP&lt;br&gt;&lt;br&gt;&lt;b&gt;PK&lt;/b&gt; cart_id&lt;br&gt;&lt;i&gt;user_id is a service reference, not a DB FK&lt;/i&gt;" vertex="1">
+          <mxGeometry height="205" width="230" x="990" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="cartitems" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#6A1B9A;fontSize=14;spacing=8;" value="&lt;b&gt;CART_ITEMS&lt;/b&gt;&lt;hr&gt;cart_item_id : BIGINT&lt;br&gt;cart_id : BIGINT&lt;br&gt;food_item_id : BIGINT (external ref)&lt;br&gt;quantity : INT&lt;br&gt;&lt;br&gt;&lt;b&gt;PK&lt;/b&gt; cart_item_id&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; cart_id → CARTS.cart_id&lt;br&gt;&lt;i&gt;food_item_id is a service reference&lt;/i&gt;" vertex="1">
+          <mxGeometry height="215" width="230" x="1240" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="cartRel" edge="1" parent="1" source="carts" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#6A1B9A;" target="cartitems" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="orderBoundary" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=#EF6C00;strokeWidth=2;fontStyle=1;fontSize=16;verticalAlign=top;spacingTop=8;" value="Order Service — Manish Saxena" vertex="1">
+          <mxGeometry height="420" width="710" x="220" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="orders" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EF6C00;fontSize=14;spacing=8;" value="&lt;b&gt;ORDERS&lt;/b&gt;&lt;hr&gt;order_id : BIGINT&lt;br&gt;user_id : BIGINT (external ref)&lt;br&gt;status : VARCHAR(30)&lt;br&gt;total_amount : DECIMAL(10,2)&lt;br&gt;created_at : TIMESTAMP&lt;br&gt;&lt;br&gt;&lt;b&gt;PK&lt;/b&gt; order_id&lt;br&gt;&lt;i&gt;user_id is a service reference, not a DB FK&lt;/i&gt;" vertex="1">
+          <mxGeometry height="220" width="300" x="255" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="orderitems" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#EF6C00;fontSize=14;spacing=8;" value="&lt;b&gt;ORDER_ITEMS&lt;/b&gt;&lt;hr&gt;order_item_id : BIGINT&lt;br&gt;order_id : BIGINT&lt;br&gt;food_item_id : BIGINT (external ref)&lt;br&gt;quantity : INT&lt;br&gt;unit_price : DECIMAL(10,2)&lt;br&gt;&lt;br&gt;&lt;b&gt;PK&lt;/b&gt; order_item_id&lt;br&gt;&lt;b&gt;FK&lt;/b&gt; order_id → ORDERS.order_id&lt;br&gt;&lt;i&gt;food_item_id is a service reference&lt;/i&gt;" vertex="1">
+          <mxGeometry height="230" width="300" x="595" y="580" as="geometry" />
+        </mxCell>
+        <mxCell id="orderRel" edge="1" parent="1" source="orders" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=ERmany;startArrow=ERone;strokeColor=#EF6C00;" target="orderitems" value="1 : N">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="paymentBoundary" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=default;strokeColor=#AD1457;strokeWidth=2;fontStyle=1;fontSize=16;verticalAlign=top;spacingTop=8;" value="Payment Service — Kunal Roy" vertex="1">
+          <mxGeometry height="330" width="520" x="980" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="payments" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#AD1457;fontSize=14;spacing=8;" value="&lt;b&gt;PAYMENTS&lt;/b&gt;&lt;hr&gt;payment_id : BIGINT&lt;br&gt;order_id : BIGINT (external ref)&lt;br&gt;amount : DECIMAL(10,2)&lt;br&gt;status : VARCHAR(30)&lt;br&gt;transaction_ref : VARCHAR(100)&lt;br&gt;created_at : TIMESTAMP&lt;br&gt;&lt;br&gt;&lt;b&gt;PK&lt;/b&gt; payment_id&lt;br&gt;&lt;i&gt;order_id is a service reference, not a DB FK&lt;/i&gt;" vertex="1">
+          <mxGeometry height="220" width="440" x="1020" y="590" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#666666;fontSize=13;spacing=10;" value="&lt;b&gt;Schema boundary rule&lt;/b&gt;&lt;br&gt;Each table belongs to exactly one service. Foreign keys are only used between tables inside the same service. Cross-service IDs (for example user_id, food_item_id, order_id) are external references and are validated through service contracts rather than database foreign keys." vertex="1">
+          <mxGeometry height="120" width="1460" x="40" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="5kcn5gM70Y1H14B6Lt5_-5" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="&lt;span style=&quot;font-size: 16px; font-weight: 700;&quot;&gt;User Service — Gaurav Vyas&lt;/span&gt;" vertex="1">
+          <mxGeometry height="30" width="255" x="77.5" y="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
