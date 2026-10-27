@@ -1,0 +1,27 @@
+"""A single CampusEats order."""
+type Order {
+  id: ID!
+  customerName: String!
+  item: String!
+  quantity: Int!
+  total: Float!
+  status: String!
+  note: String
+}
+
+input AddOrderInput {
+  customerName: String!
+  item: String!
+  quantity: Int = 1
+  total: Float!
+  note: String
+}
+
+type Query {
+  orders: [Order!]!
+  order(id: ID!): Order
+}
+
+type Mutation {
+  addOrder(input: AddOrderInput!): Order!
+}

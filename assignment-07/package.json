@@ -1,0 +1,17 @@
+{
+  "name": "campuseats-graphql",
+  "version": "1.0.0",
+  "description": "CampusEats Orders service exposed through GraphQL (CS543 Assignment 7)",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.11.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "graphql": "^16.9.0",
+    "mysql2": "^3.11.0"
+  }
+}
